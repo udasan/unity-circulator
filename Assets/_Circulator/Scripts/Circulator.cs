@@ -1,6 +1,7 @@
 ﻿/**
  * Circulator.cs
  * 
+ * 0. download Arduino IDE from http://arduino.cc/ and install driver
  * 1. select Edit > Project Settings > Player, and set API Compatibility Level to ".NET 2.0" (NOT ".NET 2.0 Subset").
  * 2. create configuration file "com.conf" in Asset folder (for Editor) or PROJECT_Data folder (for exe)
  * 3. connect arduino and check COM port number by device manager

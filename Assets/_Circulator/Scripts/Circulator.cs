@@ -43,7 +43,11 @@ public class Circulator : MonoBehaviour
 			serialPort_.Write(com);
 			Debug.Log(string.Format("write : {0} ({1}, {2})", com, circulatorNumber, command));
 		} catch (System.TimeoutException) {
+			Debug.LogWarning(string.Format("timeouted to write : {0} ({1}, {2})", com, circulatorNumber, command));
+		} catch (System.IndexOutOfRangeException) {
 			Debug.LogWarning(string.Format("failed to write : {0} ({1}, {2})", com, circulatorNumber, command));
+			//serialPort_.Close();
+			serialPort_ = null;
 		}
 	}
 
@@ -92,10 +96,9 @@ public class Circulator : MonoBehaviour
 			CirculateAll(Command.Stop);
 
 			serialPort_.Close();
-			Debug.Log("close : " + portName_);
-
 			serialPort_ = null;
-			portName_ = "";
+
+			Debug.Log("close : " + portName_);
 		}
 	}
 }

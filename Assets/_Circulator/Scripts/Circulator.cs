@@ -29,6 +29,8 @@ public class Circulator : MonoBehaviour
 		Strong   = 3
 	};
 
+	Command[] state_;
+
 	string portName_ = "";
 	SerialPort serialPort_ = null;
 
@@ -37,10 +39,13 @@ public class Circulator : MonoBehaviour
 		if ((serialPort_ == null) || !serialPort_.IsOpen) { return; }
 		if (circulatorNumber < 0 || circulatorNumber >= maxCirculators) { return; }
 
+		if (state_[circulatorNumber] == command) { return; }
+
 		string com = (circulatorNumber * System.Enum.GetNames(typeof(Command)).Length + (int)command).ToString();
 
 		try {
 			serialPort_.Write(com);
+			state_[circulatorNumber] = command;
 			Debug.Log(string.Format("write : {0} ({1}, {2})", com, circulatorNumber, command));
 		} catch (System.TimeoutException) {
 			Debug.LogWarning(string.Format("timeouted to write : {0} ({1}, {2})", com, circulatorNumber, command));
@@ -88,6 +93,9 @@ public class Circulator : MonoBehaviour
 		} else {
 			Debug.LogWarning("failed to open : " + portName_);
 		}
+
+		state_ = new Command[maxCirculators];
+		for (int i = 0; i < maxCirculators; i++) { state_[i] = Command.Stop; }
 	}
 
 	void OnDestroy ()

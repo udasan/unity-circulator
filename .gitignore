@@ -9,3 +9,5 @@ Assembly-CSharp-vs.csproj
 Assembly-CSharp.csproj
 Temp/
 Circulator/
+Assets/com.conf
+Assets/com.conf.meta

@@ -1,6 +1,9 @@
 ﻿/**
  * Circulator.cs
  * 
+ * note:
+ * COM10 or greater port might be failed to open. http://forum.unity3d.com/threads/160041-SerialPort-Open-error
+ * 
  * 0. download Arduino IDE from http://arduino.cc/ and install driver
  * 1. select Edit > Project Settings > Player, and set API Compatibility Level to ".NET 2.0" (NOT ".NET 2.0 Subset").
  * 2. create configuration file "com.conf" in Asset folder (for Editor) or PROJECT_Data folder (for exe)
